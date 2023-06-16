@@ -51,23 +51,38 @@ struct TableStruct_bookstore_5fproto_2eproto {
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable
     descriptor_table_bookstore_5fproto_2eproto;
 namespace store {
+class BookCreateInfo;
+struct BookCreateInfoDefaultTypeInternal;
+extern BookCreateInfoDefaultTypeInternal _BookCreateInfo_default_instance_;
 class BookInfo;
 struct BookInfoDefaultTypeInternal;
 extern BookInfoDefaultTypeInternal _BookInfo_default_instance_;
 class BookList;
 struct BookListDefaultTypeInternal;
 extern BookListDefaultTypeInternal _BookList_default_instance_;
+class DeleteReq;
+struct DeleteReqDefaultTypeInternal;
+extern DeleteReqDefaultTypeInternal _DeleteReq_default_instance_;
 class GetReq;
 struct GetReqDefaultTypeInternal;
 extern GetReqDefaultTypeInternal _GetReq_default_instance_;
+class StatusResponse;
+struct StatusResponseDefaultTypeInternal;
+extern StatusResponseDefaultTypeInternal _StatusResponse_default_instance_;
 }  // namespace store
 PROTOBUF_NAMESPACE_OPEN
+template <>
+::store::BookCreateInfo* Arena::CreateMaybeMessage<::store::BookCreateInfo>(Arena*);
 template <>
 ::store::BookInfo* Arena::CreateMaybeMessage<::store::BookInfo>(Arena*);
 template <>
 ::store::BookList* Arena::CreateMaybeMessage<::store::BookList>(Arena*);
 template <>
+::store::DeleteReq* Arena::CreateMaybeMessage<::store::DeleteReq>(Arena*);
+template <>
 ::store::GetReq* Arena::CreateMaybeMessage<::store::GetReq>(Arena*);
+template <>
+::store::StatusResponse* Arena::CreateMaybeMessage<::store::StatusResponse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
 namespace store {
@@ -206,6 +221,7 @@ class GetReq final :
 
   enum : int {
     kBookIdFieldNumber = 1,
+    kGetAllFieldNumber = 2,
   };
   // int32 book_id = 1;
   void clear_book_id() ;
@@ -217,6 +233,16 @@ class GetReq final :
   void _internal_set_book_id(::int32_t value);
 
   public:
+  // bool get_all = 2;
+  void clear_get_all() ;
+  bool get_all() const;
+  void set_get_all(bool value);
+
+  private:
+  bool _internal_get_all() const;
+  void _internal_set_get_all(bool value);
+
+  public:
   // @@protoc_insertion_point(class_scope:store.GetReq)
  private:
   class _Internal;
@@ -226,6 +252,7 @@ class GetReq final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::int32_t book_id_;
+    bool get_all_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -431,6 +458,193 @@ class BookInfo final :
   friend struct ::TableStruct_bookstore_5fproto_2eproto;
 };// -------------------------------------------------------------------
 
+class BookCreateInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:store.BookCreateInfo) */ {
+ public:
+  inline BookCreateInfo() : BookCreateInfo(nullptr) {}
+  ~BookCreateInfo() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR BookCreateInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  BookCreateInfo(const BookCreateInfo& from);
+  BookCreateInfo(BookCreateInfo&& from) noexcept
+    : BookCreateInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline BookCreateInfo& operator=(const BookCreateInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline BookCreateInfo& operator=(BookCreateInfo&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const BookCreateInfo& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const BookCreateInfo* internal_default_instance() {
+    return reinterpret_cast<const BookCreateInfo*>(
+               &_BookCreateInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(BookCreateInfo& a, BookCreateInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(BookCreateInfo* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(BookCreateInfo* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  BookCreateInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<BookCreateInfo>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const BookCreateInfo& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const BookCreateInfo& from) {
+    BookCreateInfo::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(BookCreateInfo* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "store.BookCreateInfo";
+  }
+  protected:
+  explicit BookCreateInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kBookTitleFieldNumber = 2,
+    kAuthorFieldNumber = 3,
+  };
+  // string book_title = 2;
+  void clear_book_title() ;
+  const std::string& book_title() const;
+
+
+
+
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_book_title(Arg_&& arg, Args_... args);
+  std::string* mutable_book_title();
+  PROTOBUF_NODISCARD std::string* release_book_title();
+  void set_allocated_book_title(std::string* ptr);
+
+  private:
+  const std::string& _internal_book_title() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_book_title(
+      const std::string& value);
+  std::string* _internal_mutable_book_title();
+
+  public:
+  // string author = 3;
+  void clear_author() ;
+  const std::string& author() const;
+
+
+
+
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_author(Arg_&& arg, Args_... args);
+  std::string* mutable_author();
+  PROTOBUF_NODISCARD std::string* release_author();
+  void set_allocated_author(std::string* ptr);
+
+  private:
+  const std::string& _internal_author() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_author(
+      const std::string& value);
+  std::string* _internal_mutable_author();
+
+  public:
+  // @@protoc_insertion_point(class_scope:store.BookCreateInfo)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr book_title_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr author_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_bookstore_5fproto_2eproto;
+};// -------------------------------------------------------------------
+
 class BookList final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:store.BookList) */ {
  public:
@@ -487,7 +701,7 @@ class BookList final :
                &_BookList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(BookList& a, BookList& b) {
     a.Swap(&b);
@@ -561,26 +775,26 @@ class BookList final :
   enum : int {
     kBookListFieldNumber = 1,
   };
-  // repeated .store.BookInfo bookList = 1;
-  int booklist_size() const;
+  // repeated .store.BookInfo book_list = 1;
+  int book_list_size() const;
   private:
-  int _internal_booklist_size() const;
+  int _internal_book_list_size() const;
 
   public:
-  void clear_booklist() ;
-  ::store::BookInfo* mutable_booklist(int index);
+  void clear_book_list() ;
+  ::store::BookInfo* mutable_book_list(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::store::BookInfo >*
-      mutable_booklist();
+      mutable_book_list();
   private:
-  const ::store::BookInfo& _internal_booklist(int index) const;
-  ::store::BookInfo* _internal_add_booklist();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::store::BookInfo>& _internal_booklist() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::store::BookInfo>* _internal_mutable_booklist();
+  const ::store::BookInfo& _internal_book_list(int index) const;
+  ::store::BookInfo* _internal_add_book_list();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::store::BookInfo>& _internal_book_list() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::store::BookInfo>* _internal_mutable_book_list();
   public:
-  const ::store::BookInfo& booklist(int index) const;
-  ::store::BookInfo* add_booklist();
+  const ::store::BookInfo& book_list(int index) const;
+  ::store::BookInfo* add_book_list();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::store::BookInfo >&
-      booklist() const;
+      book_list() const;
   // @@protoc_insertion_point(class_scope:store.BookList)
  private:
   class _Internal;
@@ -589,7 +803,327 @@ class BookList final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::store::BookInfo > booklist_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::store::BookInfo > book_list_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_bookstore_5fproto_2eproto;
+};// -------------------------------------------------------------------
+
+class DeleteReq final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:store.DeleteReq) */ {
+ public:
+  inline DeleteReq() : DeleteReq(nullptr) {}
+  ~DeleteReq() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR DeleteReq(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  DeleteReq(const DeleteReq& from);
+  DeleteReq(DeleteReq&& from) noexcept
+    : DeleteReq() {
+    *this = ::std::move(from);
+  }
+
+  inline DeleteReq& operator=(const DeleteReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DeleteReq& operator=(DeleteReq&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DeleteReq& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DeleteReq* internal_default_instance() {
+    return reinterpret_cast<const DeleteReq*>(
+               &_DeleteReq_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(DeleteReq& a, DeleteReq& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(DeleteReq* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DeleteReq* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DeleteReq* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DeleteReq>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const DeleteReq& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const DeleteReq& from) {
+    DeleteReq::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DeleteReq* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "store.DeleteReq";
+  }
+  protected:
+  explicit DeleteReq(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kBookIdFieldNumber = 1,
+  };
+  // int32 book_id = 1;
+  void clear_book_id() ;
+  ::int32_t book_id() const;
+  void set_book_id(::int32_t value);
+
+  private:
+  ::int32_t _internal_book_id() const;
+  void _internal_set_book_id(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:store.DeleteReq)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::int32_t book_id_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_bookstore_5fproto_2eproto;
+};// -------------------------------------------------------------------
+
+class StatusResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:store.StatusResponse) */ {
+ public:
+  inline StatusResponse() : StatusResponse(nullptr) {}
+  ~StatusResponse() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR StatusResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  StatusResponse(const StatusResponse& from);
+  StatusResponse(StatusResponse&& from) noexcept
+    : StatusResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline StatusResponse& operator=(const StatusResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline StatusResponse& operator=(StatusResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const StatusResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const StatusResponse* internal_default_instance() {
+    return reinterpret_cast<const StatusResponse*>(
+               &_StatusResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(StatusResponse& a, StatusResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(StatusResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(StatusResponse* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  StatusResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<StatusResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const StatusResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const StatusResponse& from) {
+    StatusResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(StatusResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "store.StatusResponse";
+  }
+  protected:
+  explicit StatusResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kStatusFieldNumber = 1,
+  };
+  // string status = 1;
+  void clear_status() ;
+  const std::string& status() const;
+
+
+
+
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_status(Arg_&& arg, Args_... args);
+  std::string* mutable_status();
+  PROTOBUF_NODISCARD std::string* release_status();
+  void set_allocated_status(std::string* ptr);
+
+  private:
+  const std::string& _internal_status() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_status(
+      const std::string& value);
+  std::string* _internal_mutable_status();
+
+  public:
+  // @@protoc_insertion_point(class_scope:store.StatusResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -630,6 +1164,26 @@ inline ::int32_t GetReq::_internal_book_id() const {
 inline void GetReq::_internal_set_book_id(::int32_t value) {
   ;
   _impl_.book_id_ = value;
+}
+
+// bool get_all = 2;
+inline void GetReq::clear_get_all() {
+  _impl_.get_all_ = false;
+}
+inline bool GetReq::get_all() const {
+  // @@protoc_insertion_point(field_get:store.GetReq.get_all)
+  return _internal_get_all();
+}
+inline void GetReq::set_get_all(bool value) {
+  _internal_set_get_all(value);
+  // @@protoc_insertion_point(field_set:store.GetReq.get_all)
+}
+inline bool GetReq::_internal_get_all() const {
+  return _impl_.get_all_;
+}
+inline void GetReq::_internal_set_get_all(bool value) {
+  ;
+  _impl_.get_all_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -752,54 +1306,227 @@ inline void BookInfo::set_allocated_author(std::string* value) {
 
 // -------------------------------------------------------------------
 
+// BookCreateInfo
+
+// string book_title = 2;
+inline void BookCreateInfo::clear_book_title() {
+  _impl_.book_title_.ClearToEmpty();
+}
+inline const std::string& BookCreateInfo::book_title() const {
+  // @@protoc_insertion_point(field_get:store.BookCreateInfo.book_title)
+  return _internal_book_title();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void BookCreateInfo::set_book_title(Arg_&& arg,
+                                                     Args_... args) {
+  ;
+  _impl_.book_title_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:store.BookCreateInfo.book_title)
+}
+inline std::string* BookCreateInfo::mutable_book_title() {
+  std::string* _s = _internal_mutable_book_title();
+  // @@protoc_insertion_point(field_mutable:store.BookCreateInfo.book_title)
+  return _s;
+}
+inline const std::string& BookCreateInfo::_internal_book_title() const {
+  return _impl_.book_title_.Get();
+}
+inline void BookCreateInfo::_internal_set_book_title(const std::string& value) {
+  ;
+
+
+  _impl_.book_title_.Set(value, GetArenaForAllocation());
+}
+inline std::string* BookCreateInfo::_internal_mutable_book_title() {
+  ;
+  return _impl_.book_title_.Mutable( GetArenaForAllocation());
+}
+inline std::string* BookCreateInfo::release_book_title() {
+  // @@protoc_insertion_point(field_release:store.BookCreateInfo.book_title)
+  return _impl_.book_title_.Release();
+}
+inline void BookCreateInfo::set_allocated_book_title(std::string* value) {
+  _impl_.book_title_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.book_title_.IsDefault()) {
+          _impl_.book_title_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:store.BookCreateInfo.book_title)
+}
+
+// string author = 3;
+inline void BookCreateInfo::clear_author() {
+  _impl_.author_.ClearToEmpty();
+}
+inline const std::string& BookCreateInfo::author() const {
+  // @@protoc_insertion_point(field_get:store.BookCreateInfo.author)
+  return _internal_author();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void BookCreateInfo::set_author(Arg_&& arg,
+                                                     Args_... args) {
+  ;
+  _impl_.author_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:store.BookCreateInfo.author)
+}
+inline std::string* BookCreateInfo::mutable_author() {
+  std::string* _s = _internal_mutable_author();
+  // @@protoc_insertion_point(field_mutable:store.BookCreateInfo.author)
+  return _s;
+}
+inline const std::string& BookCreateInfo::_internal_author() const {
+  return _impl_.author_.Get();
+}
+inline void BookCreateInfo::_internal_set_author(const std::string& value) {
+  ;
+
+
+  _impl_.author_.Set(value, GetArenaForAllocation());
+}
+inline std::string* BookCreateInfo::_internal_mutable_author() {
+  ;
+  return _impl_.author_.Mutable( GetArenaForAllocation());
+}
+inline std::string* BookCreateInfo::release_author() {
+  // @@protoc_insertion_point(field_release:store.BookCreateInfo.author)
+  return _impl_.author_.Release();
+}
+inline void BookCreateInfo::set_allocated_author(std::string* value) {
+  _impl_.author_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.author_.IsDefault()) {
+          _impl_.author_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:store.BookCreateInfo.author)
+}
+
+// -------------------------------------------------------------------
+
 // BookList
 
-// repeated .store.BookInfo bookList = 1;
-inline int BookList::_internal_booklist_size() const {
-  return _impl_.booklist_.size();
+// repeated .store.BookInfo book_list = 1;
+inline int BookList::_internal_book_list_size() const {
+  return _impl_.book_list_.size();
 }
-inline int BookList::booklist_size() const {
-  return _internal_booklist_size();
+inline int BookList::book_list_size() const {
+  return _internal_book_list_size();
 }
-inline void BookList::clear_booklist() {
-  _internal_mutable_booklist()->Clear();
+inline void BookList::clear_book_list() {
+  _internal_mutable_book_list()->Clear();
 }
-inline ::store::BookInfo* BookList::mutable_booklist(int index) {
-  // @@protoc_insertion_point(field_mutable:store.BookList.bookList)
-  return _internal_mutable_booklist()->Mutable(index);
+inline ::store::BookInfo* BookList::mutable_book_list(int index) {
+  // @@protoc_insertion_point(field_mutable:store.BookList.book_list)
+  return _internal_mutable_book_list()->Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::store::BookInfo >*
-BookList::mutable_booklist() {
-  // @@protoc_insertion_point(field_mutable_list:store.BookList.bookList)
-  return _internal_mutable_booklist();
+BookList::mutable_book_list() {
+  // @@protoc_insertion_point(field_mutable_list:store.BookList.book_list)
+  return _internal_mutable_book_list();
 }
-inline const ::store::BookInfo& BookList::_internal_booklist(int index) const {
-  return _internal_booklist().Get(index);
+inline const ::store::BookInfo& BookList::_internal_book_list(int index) const {
+  return _internal_book_list().Get(index);
 }
-inline const ::store::BookInfo& BookList::booklist(int index) const {
-  // @@protoc_insertion_point(field_get:store.BookList.bookList)
-  return _internal_booklist(index);
+inline const ::store::BookInfo& BookList::book_list(int index) const {
+  // @@protoc_insertion_point(field_get:store.BookList.book_list)
+  return _internal_book_list(index);
 }
-inline ::store::BookInfo* BookList::_internal_add_booklist() {
-  return _internal_mutable_booklist()->Add();
+inline ::store::BookInfo* BookList::_internal_add_book_list() {
+  return _internal_mutable_book_list()->Add();
 }
-inline ::store::BookInfo* BookList::add_booklist() {
-  ::store::BookInfo* _add = _internal_add_booklist();
-  // @@protoc_insertion_point(field_add:store.BookList.bookList)
+inline ::store::BookInfo* BookList::add_book_list() {
+  ::store::BookInfo* _add = _internal_add_book_list();
+  // @@protoc_insertion_point(field_add:store.BookList.book_list)
   return _add;
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::store::BookInfo >&
-BookList::booklist() const {
-  // @@protoc_insertion_point(field_list:store.BookList.bookList)
-  return _internal_booklist();
+BookList::book_list() const {
+  // @@protoc_insertion_point(field_list:store.BookList.book_list)
+  return _internal_book_list();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::store::BookInfo>&
-BookList::_internal_booklist() const {
-  return _impl_.booklist_;
+BookList::_internal_book_list() const {
+  return _impl_.book_list_;
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::store::BookInfo>*
-BookList::_internal_mutable_booklist() {
-  return &_impl_.booklist_;
+BookList::_internal_mutable_book_list() {
+  return &_impl_.book_list_;
+}
+
+// -------------------------------------------------------------------
+
+// DeleteReq
+
+// int32 book_id = 1;
+inline void DeleteReq::clear_book_id() {
+  _impl_.book_id_ = 0;
+}
+inline ::int32_t DeleteReq::book_id() const {
+  // @@protoc_insertion_point(field_get:store.DeleteReq.book_id)
+  return _internal_book_id();
+}
+inline void DeleteReq::set_book_id(::int32_t value) {
+  _internal_set_book_id(value);
+  // @@protoc_insertion_point(field_set:store.DeleteReq.book_id)
+}
+inline ::int32_t DeleteReq::_internal_book_id() const {
+  return _impl_.book_id_;
+}
+inline void DeleteReq::_internal_set_book_id(::int32_t value) {
+  ;
+  _impl_.book_id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// StatusResponse
+
+// string status = 1;
+inline void StatusResponse::clear_status() {
+  _impl_.status_.ClearToEmpty();
+}
+inline const std::string& StatusResponse::status() const {
+  // @@protoc_insertion_point(field_get:store.StatusResponse.status)
+  return _internal_status();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void StatusResponse::set_status(Arg_&& arg,
+                                                     Args_... args) {
+  ;
+  _impl_.status_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:store.StatusResponse.status)
+}
+inline std::string* StatusResponse::mutable_status() {
+  std::string* _s = _internal_mutable_status();
+  // @@protoc_insertion_point(field_mutable:store.StatusResponse.status)
+  return _s;
+}
+inline const std::string& StatusResponse::_internal_status() const {
+  return _impl_.status_.Get();
+}
+inline void StatusResponse::_internal_set_status(const std::string& value) {
+  ;
+
+
+  _impl_.status_.Set(value, GetArenaForAllocation());
+}
+inline std::string* StatusResponse::_internal_mutable_status() {
+  ;
+  return _impl_.status_.Mutable( GetArenaForAllocation());
+}
+inline std::string* StatusResponse::release_status() {
+  // @@protoc_insertion_point(field_release:store.StatusResponse.status)
+  return _impl_.status_.Release();
+}
+inline void StatusResponse::set_allocated_status(std::string* value) {
+  _impl_.status_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.status_.IsDefault()) {
+          _impl_.status_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:store.StatusResponse.status)
 }
 
 #ifdef __GNUC__

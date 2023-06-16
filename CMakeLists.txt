@@ -19,6 +19,7 @@ set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
 get_filename_component(hw_proto "bookstore_proto.proto" ABSOLUTE)
 get_filename_component(hw_proto_path "${hw_proto}" PATH)
 
+
 # Generated sources
 set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/bookstore_proto.pb.cc")
 set(hw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/bookstore_proto.pb.h")
@@ -35,7 +36,6 @@ add_custom_command(
         DEPENDS "${hw_proto}")
 
 # Include generated *.pb.h files
-include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
 # hw_grpc_proto
 add_library(hw_grpc_proto

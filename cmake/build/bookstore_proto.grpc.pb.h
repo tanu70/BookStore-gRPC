@@ -42,11 +42,38 @@ class BookStore final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::BookList>> PrepareAsyncGetBookRequest(::grpc::ClientContext* context, const ::store::GetReq& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::BookList>>(PrepareAsyncGetBookRequestRaw(context, request, cq));
     }
+    virtual ::grpc::Status CreateBookRequest(::grpc::ClientContext* context, const ::store::BookCreateInfo& request, ::store::BookInfo* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>> AsyncCreateBookRequest(::grpc::ClientContext* context, const ::store::BookCreateInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>>(AsyncCreateBookRequestRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>> PrepareAsyncCreateBookRequest(::grpc::ClientContext* context, const ::store::BookCreateInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>>(PrepareAsyncCreateBookRequestRaw(context, request, cq));
+    }
+    virtual ::grpc::Status EditBookRequest(::grpc::ClientContext* context, const ::store::BookInfo& request, ::store::BookInfo* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>> AsyncEditBookRequest(::grpc::ClientContext* context, const ::store::BookInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>>(AsyncEditBookRequestRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>> PrepareAsyncEditBookRequest(::grpc::ClientContext* context, const ::store::BookInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>>(PrepareAsyncEditBookRequestRaw(context, request, cq));
+    }
+    virtual ::grpc::Status DeleteBookRequest(::grpc::ClientContext* context, const ::store::DeleteReq& request, ::store::StatusResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::StatusResponse>> AsyncDeleteBookRequest(::grpc::ClientContext* context, const ::store::DeleteReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::StatusResponse>>(AsyncDeleteBookRequestRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::StatusResponse>> PrepareAsyncDeleteBookRequest(::grpc::ClientContext* context, const ::store::DeleteReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::store::StatusResponse>>(PrepareAsyncDeleteBookRequestRaw(context, request, cq));
+    }
     class async_interface {
      public:
       virtual ~async_interface() {}
       virtual void GetBookRequest(::grpc::ClientContext* context, const ::store::GetReq* request, ::store::BookList* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetBookRequest(::grpc::ClientContext* context, const ::store::GetReq* request, ::store::BookList* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void CreateBookRequest(::grpc::ClientContext* context, const ::store::BookCreateInfo* request, ::store::BookInfo* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void CreateBookRequest(::grpc::ClientContext* context, const ::store::BookCreateInfo* request, ::store::BookInfo* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void EditBookRequest(::grpc::ClientContext* context, const ::store::BookInfo* request, ::store::BookInfo* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void EditBookRequest(::grpc::ClientContext* context, const ::store::BookInfo* request, ::store::BookInfo* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void DeleteBookRequest(::grpc::ClientContext* context, const ::store::DeleteReq* request, ::store::StatusResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void DeleteBookRequest(::grpc::ClientContext* context, const ::store::DeleteReq* request, ::store::StatusResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -54,6 +81,12 @@ class BookStore final {
    private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::store::BookList>* AsyncGetBookRequestRaw(::grpc::ClientContext* context, const ::store::GetReq& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::store::BookList>* PrepareAsyncGetBookRequestRaw(::grpc::ClientContext* context, const ::store::GetReq& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>* AsyncCreateBookRequestRaw(::grpc::ClientContext* context, const ::store::BookCreateInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>* PrepareAsyncCreateBookRequestRaw(::grpc::ClientContext* context, const ::store::BookCreateInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>* AsyncEditBookRequestRaw(::grpc::ClientContext* context, const ::store::BookInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::store::BookInfo>* PrepareAsyncEditBookRequestRaw(::grpc::ClientContext* context, const ::store::BookInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::store::StatusResponse>* AsyncDeleteBookRequestRaw(::grpc::ClientContext* context, const ::store::DeleteReq& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::store::StatusResponse>* PrepareAsyncDeleteBookRequestRaw(::grpc::ClientContext* context, const ::store::DeleteReq& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -65,11 +98,38 @@ class BookStore final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::BookList>> PrepareAsyncGetBookRequest(::grpc::ClientContext* context, const ::store::GetReq& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::BookList>>(PrepareAsyncGetBookRequestRaw(context, request, cq));
     }
+    ::grpc::Status CreateBookRequest(::grpc::ClientContext* context, const ::store::BookCreateInfo& request, ::store::BookInfo* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::BookInfo>> AsyncCreateBookRequest(::grpc::ClientContext* context, const ::store::BookCreateInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::BookInfo>>(AsyncCreateBookRequestRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::BookInfo>> PrepareAsyncCreateBookRequest(::grpc::ClientContext* context, const ::store::BookCreateInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::BookInfo>>(PrepareAsyncCreateBookRequestRaw(context, request, cq));
+    }
+    ::grpc::Status EditBookRequest(::grpc::ClientContext* context, const ::store::BookInfo& request, ::store::BookInfo* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::BookInfo>> AsyncEditBookRequest(::grpc::ClientContext* context, const ::store::BookInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::BookInfo>>(AsyncEditBookRequestRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::BookInfo>> PrepareAsyncEditBookRequest(::grpc::ClientContext* context, const ::store::BookInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::BookInfo>>(PrepareAsyncEditBookRequestRaw(context, request, cq));
+    }
+    ::grpc::Status DeleteBookRequest(::grpc::ClientContext* context, const ::store::DeleteReq& request, ::store::StatusResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::StatusResponse>> AsyncDeleteBookRequest(::grpc::ClientContext* context, const ::store::DeleteReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::StatusResponse>>(AsyncDeleteBookRequestRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::StatusResponse>> PrepareAsyncDeleteBookRequest(::grpc::ClientContext* context, const ::store::DeleteReq& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::store::StatusResponse>>(PrepareAsyncDeleteBookRequestRaw(context, request, cq));
+    }
     class async final :
       public StubInterface::async_interface {
      public:
       void GetBookRequest(::grpc::ClientContext* context, const ::store::GetReq* request, ::store::BookList* response, std::function<void(::grpc::Status)>) override;
       void GetBookRequest(::grpc::ClientContext* context, const ::store::GetReq* request, ::store::BookList* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void CreateBookRequest(::grpc::ClientContext* context, const ::store::BookCreateInfo* request, ::store::BookInfo* response, std::function<void(::grpc::Status)>) override;
+      void CreateBookRequest(::grpc::ClientContext* context, const ::store::BookCreateInfo* request, ::store::BookInfo* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void EditBookRequest(::grpc::ClientContext* context, const ::store::BookInfo* request, ::store::BookInfo* response, std::function<void(::grpc::Status)>) override;
+      void EditBookRequest(::grpc::ClientContext* context, const ::store::BookInfo* request, ::store::BookInfo* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void DeleteBookRequest(::grpc::ClientContext* context, const ::store::DeleteReq* request, ::store::StatusResponse* response, std::function<void(::grpc::Status)>) override;
+      void DeleteBookRequest(::grpc::ClientContext* context, const ::store::DeleteReq* request, ::store::StatusResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -83,7 +143,16 @@ class BookStore final {
     class async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::store::BookList>* AsyncGetBookRequestRaw(::grpc::ClientContext* context, const ::store::GetReq& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::store::BookList>* PrepareAsyncGetBookRequestRaw(::grpc::ClientContext* context, const ::store::GetReq& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::store::BookInfo>* AsyncCreateBookRequestRaw(::grpc::ClientContext* context, const ::store::BookCreateInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::store::BookInfo>* PrepareAsyncCreateBookRequestRaw(::grpc::ClientContext* context, const ::store::BookCreateInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::store::BookInfo>* AsyncEditBookRequestRaw(::grpc::ClientContext* context, const ::store::BookInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::store::BookInfo>* PrepareAsyncEditBookRequestRaw(::grpc::ClientContext* context, const ::store::BookInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::store::StatusResponse>* AsyncDeleteBookRequestRaw(::grpc::ClientContext* context, const ::store::DeleteReq& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::store::StatusResponse>* PrepareAsyncDeleteBookRequestRaw(::grpc::ClientContext* context, const ::store::DeleteReq& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_GetBookRequest_;
+    const ::grpc::internal::RpcMethod rpcmethod_CreateBookRequest_;
+    const ::grpc::internal::RpcMethod rpcmethod_EditBookRequest_;
+    const ::grpc::internal::RpcMethod rpcmethod_DeleteBookRequest_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -92,6 +161,9 @@ class BookStore final {
     Service();
     virtual ~Service();
     virtual ::grpc::Status GetBookRequest(::grpc::ServerContext* context, const ::store::GetReq* request, ::store::BookList* response);
+    virtual ::grpc::Status CreateBookRequest(::grpc::ServerContext* context, const ::store::BookCreateInfo* request, ::store::BookInfo* response);
+    virtual ::grpc::Status EditBookRequest(::grpc::ServerContext* context, const ::store::BookInfo* request, ::store::BookInfo* response);
+    virtual ::grpc::Status DeleteBookRequest(::grpc::ServerContext* context, const ::store::DeleteReq* request, ::store::StatusResponse* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_GetBookRequest : public BaseClass {
@@ -113,7 +185,67 @@ class BookStore final {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_GetBookRequest<Service > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_CreateBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_CreateBookRequest() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_CreateBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookCreateInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestCreateBookRequest(::grpc::ServerContext* context, ::store::BookCreateInfo* request, ::grpc::ServerAsyncResponseWriter< ::store::BookInfo>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_EditBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_EditBookRequest() {
+      ::grpc::Service::MarkMethodAsync(2);
+    }
+    ~WithAsyncMethod_EditBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status EditBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestEditBookRequest(::grpc::ServerContext* context, ::store::BookInfo* request, ::grpc::ServerAsyncResponseWriter< ::store::BookInfo>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_DeleteBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_DeleteBookRequest() {
+      ::grpc::Service::MarkMethodAsync(3);
+    }
+    ~WithAsyncMethod_DeleteBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DeleteBookRequest(::grpc::ServerContext* /*context*/, const ::store::DeleteReq* /*request*/, ::store::StatusResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDeleteBookRequest(::grpc::ServerContext* context, ::store::DeleteReq* request, ::grpc::ServerAsyncResponseWriter< ::store::StatusResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_GetBookRequest<WithAsyncMethod_CreateBookRequest<WithAsyncMethod_EditBookRequest<WithAsyncMethod_DeleteBookRequest<Service > > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_GetBookRequest : public BaseClass {
    private:
@@ -141,7 +273,88 @@ class BookStore final {
     virtual ::grpc::ServerUnaryReactor* GetBookRequest(
       ::grpc::CallbackServerContext* /*context*/, const ::store::GetReq* /*request*/, ::store::BookList* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_GetBookRequest<Service > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_CreateBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_CreateBookRequest() {
+      ::grpc::Service::MarkMethodCallback(1,
+          new ::grpc::internal::CallbackUnaryHandler< ::store::BookCreateInfo, ::store::BookInfo>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::store::BookCreateInfo* request, ::store::BookInfo* response) { return this->CreateBookRequest(context, request, response); }));}
+    void SetMessageAllocatorFor_CreateBookRequest(
+        ::grpc::MessageAllocator< ::store::BookCreateInfo, ::store::BookInfo>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::store::BookCreateInfo, ::store::BookInfo>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_CreateBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookCreateInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* CreateBookRequest(
+      ::grpc::CallbackServerContext* /*context*/, const ::store::BookCreateInfo* /*request*/, ::store::BookInfo* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_EditBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_EditBookRequest() {
+      ::grpc::Service::MarkMethodCallback(2,
+          new ::grpc::internal::CallbackUnaryHandler< ::store::BookInfo, ::store::BookInfo>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::store::BookInfo* request, ::store::BookInfo* response) { return this->EditBookRequest(context, request, response); }));}
+    void SetMessageAllocatorFor_EditBookRequest(
+        ::grpc::MessageAllocator< ::store::BookInfo, ::store::BookInfo>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::store::BookInfo, ::store::BookInfo>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_EditBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status EditBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* EditBookRequest(
+      ::grpc::CallbackServerContext* /*context*/, const ::store::BookInfo* /*request*/, ::store::BookInfo* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_DeleteBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_DeleteBookRequest() {
+      ::grpc::Service::MarkMethodCallback(3,
+          new ::grpc::internal::CallbackUnaryHandler< ::store::DeleteReq, ::store::StatusResponse>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::store::DeleteReq* request, ::store::StatusResponse* response) { return this->DeleteBookRequest(context, request, response); }));}
+    void SetMessageAllocatorFor_DeleteBookRequest(
+        ::grpc::MessageAllocator< ::store::DeleteReq, ::store::StatusResponse>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::store::DeleteReq, ::store::StatusResponse>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_DeleteBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DeleteBookRequest(::grpc::ServerContext* /*context*/, const ::store::DeleteReq* /*request*/, ::store::StatusResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* DeleteBookRequest(
+      ::grpc::CallbackServerContext* /*context*/, const ::store::DeleteReq* /*request*/, ::store::StatusResponse* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_GetBookRequest<WithCallbackMethod_CreateBookRequest<WithCallbackMethod_EditBookRequest<WithCallbackMethod_DeleteBookRequest<Service > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_GetBookRequest : public BaseClass {
@@ -156,6 +369,57 @@ class BookStore final {
     }
     // disable synchronous version of this method
     ::grpc::Status GetBookRequest(::grpc::ServerContext* /*context*/, const ::store::GetReq* /*request*/, ::store::BookList* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_CreateBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_CreateBookRequest() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_CreateBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookCreateInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_EditBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_EditBookRequest() {
+      ::grpc::Service::MarkMethodGeneric(2);
+    }
+    ~WithGenericMethod_EditBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status EditBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_DeleteBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_DeleteBookRequest() {
+      ::grpc::Service::MarkMethodGeneric(3);
+    }
+    ~WithGenericMethod_DeleteBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DeleteBookRequest(::grpc::ServerContext* /*context*/, const ::store::DeleteReq* /*request*/, ::store::StatusResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -181,6 +445,66 @@ class BookStore final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_CreateBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_CreateBookRequest() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_CreateBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookCreateInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestCreateBookRequest(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_EditBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_EditBookRequest() {
+      ::grpc::Service::MarkMethodRaw(2);
+    }
+    ~WithRawMethod_EditBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status EditBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestEditBookRequest(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_DeleteBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_DeleteBookRequest() {
+      ::grpc::Service::MarkMethodRaw(3);
+    }
+    ~WithRawMethod_DeleteBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DeleteBookRequest(::grpc::ServerContext* /*context*/, const ::store::DeleteReq* /*request*/, ::store::StatusResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDeleteBookRequest(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawCallbackMethod_GetBookRequest : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -200,6 +524,72 @@ class BookStore final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* GetBookRequest(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_CreateBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_CreateBookRequest() {
+      ::grpc::Service::MarkMethodRawCallback(1,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CreateBookRequest(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_CreateBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookCreateInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* CreateBookRequest(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_EditBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_EditBookRequest() {
+      ::grpc::Service::MarkMethodRawCallback(2,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->EditBookRequest(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_EditBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status EditBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* EditBookRequest(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_DeleteBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_DeleteBookRequest() {
+      ::grpc::Service::MarkMethodRawCallback(3,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->DeleteBookRequest(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_DeleteBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DeleteBookRequest(::grpc::ServerContext* /*context*/, const ::store::DeleteReq* /*request*/, ::store::StatusResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* DeleteBookRequest(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
@@ -229,9 +619,90 @@ class BookStore final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedGetBookRequest(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::store::GetReq,::store::BookList>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_GetBookRequest<Service > StreamedUnaryService;
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_CreateBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_CreateBookRequest() {
+      ::grpc::Service::MarkMethodStreamed(1,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::store::BookCreateInfo, ::store::BookInfo>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::store::BookCreateInfo, ::store::BookInfo>* streamer) {
+                       return this->StreamedCreateBookRequest(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_CreateBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status CreateBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookCreateInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedCreateBookRequest(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::store::BookCreateInfo,::store::BookInfo>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_EditBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_EditBookRequest() {
+      ::grpc::Service::MarkMethodStreamed(2,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::store::BookInfo, ::store::BookInfo>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::store::BookInfo, ::store::BookInfo>* streamer) {
+                       return this->StreamedEditBookRequest(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_EditBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status EditBookRequest(::grpc::ServerContext* /*context*/, const ::store::BookInfo* /*request*/, ::store::BookInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedEditBookRequest(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::store::BookInfo,::store::BookInfo>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_DeleteBookRequest : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_DeleteBookRequest() {
+      ::grpc::Service::MarkMethodStreamed(3,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::store::DeleteReq, ::store::StatusResponse>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::store::DeleteReq, ::store::StatusResponse>* streamer) {
+                       return this->StreamedDeleteBookRequest(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_DeleteBookRequest() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status DeleteBookRequest(::grpc::ServerContext* /*context*/, const ::store::DeleteReq* /*request*/, ::store::StatusResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedDeleteBookRequest(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::store::DeleteReq,::store::StatusResponse>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_GetBookRequest<WithStreamedUnaryMethod_CreateBookRequest<WithStreamedUnaryMethod_EditBookRequest<WithStreamedUnaryMethod_DeleteBookRequest<Service > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_GetBookRequest<Service > StreamedService;
+  typedef WithStreamedUnaryMethod_GetBookRequest<WithStreamedUnaryMethod_CreateBookRequest<WithStreamedUnaryMethod_EditBookRequest<WithStreamedUnaryMethod_DeleteBookRequest<Service > > > > StreamedService;
 };
 
 }  // namespace store
