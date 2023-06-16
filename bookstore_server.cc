@@ -1,6 +1,7 @@
 #include <grpcpp/grpcpp.h>
 #include <bits/stdc++.h>
 #include "cmake/build/bookstore_proto.grpc.pb.h"
+#include <grpcpp/ext/proto_server_reflection_plugin.h>
 
 
 using grpc::Server;
@@ -110,11 +111,14 @@ class RequestHandlerImplementation final : public BookStore :: Service {
 
 void runServer()
 {
+
     std::string server_address("0.0.0.0:50051");
     RequestHandlerImplementation service;
 
     ServerBuilder builder;
 
+    grpc::EnableDefaultHealthCheckService(true);
+    grpc::reflection::InitProtoReflectionServerBuilderPlugin();
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
     builder.RegisterService(&service);
 

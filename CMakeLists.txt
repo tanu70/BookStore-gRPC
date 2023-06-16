@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 
 project(BookStore-gRPC)
 
-#include(../cmake/common.cmake)
+#include(cmake/common.cmake)
 
 set(protobuf_MODULE_COMPATIBLE TRUE)
 find_package(Protobuf CONFIG REQUIRED)
@@ -19,6 +19,8 @@ set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
 get_filename_component(hw_proto "bookstore_proto.proto" ABSOLUTE)
 get_filename_component(hw_proto_path "${hw_proto}" PATH)
 
+# set(_PROTOBUF_LIBPROTOBUF libprotobuf)
+set(_REFLECTION gRPC::grpc++_reflection)
 
 # Generated sources
 set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/bookstore_proto.pb.cc")
